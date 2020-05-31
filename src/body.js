@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme)=>({
 		display:"flex",
 		justifyContent:"center"
 	},
+	body:{
+		paddingTop:theme.spacing(2)
+	},
 	bodyDesktop:{
 		width:"75vh" // Body will be in visible aspect ratio 4:3
 	},
@@ -35,7 +38,7 @@ export default function Body(props){
 	const classes = useStyles(theme);
 	return(
 		<Box className={classes.bodyContainer}>
-			<Box className={clsx(!mobile && classes.bodyDesktop, mobile && classes.bodyMobile)}>
+			<Box className={clsx(classes.body,!mobile && classes.bodyDesktop, mobile && classes.bodyMobile)}>
 				{props.children}
 			</Box>
 		</Box>
