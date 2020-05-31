@@ -52,7 +52,16 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
+/* Header URLs to be passed using props.pages in the format
+ 		{
+			"title":"text",
+			"to":"url"
+		}
+*/	
+
 export default function Header(props){
+	if(!props.pages)
+		throw "props.pages must be defined, even if empty."
 	const theme = useTheme();
 	const classes = useStyles(theme);
 	
@@ -63,7 +72,7 @@ export default function Header(props){
 					<HomeIcon />
 				</IconButton>
 				<Box className={classes.leftAppbarContainer}>
-					<Typography variant="h2" className={classes.appbarTitle}>Zane Clark, Ketexon</Typography>
+					<Typography variant="h2" className={classes.appbarTitle}>{props.title}</Typography>
 				</Box>
 				<Divider orientation="vertical" flexItem />
 				<Box className={classes.rightAppbarContainer}>
@@ -73,9 +82,13 @@ export default function Header(props){
 						variant="text" 
 						aria-label="page select button group"
 						fullWidth={true}>
-						<Button>One</Button>
-						<Button>Two</Button>
-						<Button>Three</Button>
+							{
+								props.pages.map(
+									(page, index)=>(
+										<Button component={Link} key={index} to={location=>({...location, pathname:page.to})}>{page.title}</Button>
+									)
+								)
+							}
 					</ButtonGroup>
 				</Box>
 			</Toolbar>
