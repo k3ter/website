@@ -21,10 +21,19 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import queryString from "query-string";
 
 // Custom components
-import Home from "./home"
+// Outer shell
 import Header from "./header"
+import Device from "./device"
 
-const title = "Ketexon | Zane Clark"
+//Pages
+import Home from "./home"
+import {E404} from "./error"
+
+const headerPages = [
+	{title:"about", to:"/about"}
+]
+
+const title = "Zane Clark, Ketexon"
 
 const theme = createMuiTheme({
 	palette: {
@@ -37,7 +46,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function App(props) {
 	const getQuery = queryString.parse(window.location.search);
-		
+	
 	useEffect(
 		()=>{
 			document.title = title;
@@ -48,11 +57,10 @@ export default function App(props) {
 		<Router>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
-				<Header/>
+				<Header pages={headerPages} title={title}/>
 				<Switch>
-					<Route exact path="/">
-						<Home/>
-					</Route>
+					<Route exact path="/" component={Home}/>
+					<Route component={E404}/>
 				</Switch>
 			</ThemeProvider>
 		</Router>
