@@ -47,9 +47,18 @@ const useStyles = makeStyles((theme) => ({
 	},
 	leftAppbarContainerMobile:{
 		justifyContent:"Center",
+		"& h1,h2,h3,h4,h5,h6,p":{
+			textAlign:"center"
+		}
 	},
 	leftAppbarContainerDesktop:{
 		justifyContent:"flex-end",
+		"& h1,h2,h3,h4,h5,h6,p":{
+			textAlign:"right"
+		}
+	},
+	centralDivider:{
+		marginLeft:theme.spacing(1),
 	},
 	rightAppbarContainer:{
 		width:0,
@@ -162,7 +171,7 @@ export default function Header(props){
 					<Typography variant="h2" className={classes.appbarTitle}>{props.title}</Typography>
 				</Box>
 				<Device desktop>
-					<Divider orientation="vertical" flexItem />
+					<Divider className={classes.centralDivider} orientation="vertical" flexItem />
 					<Box className={classes.rightAppbarContainer}>
 						<ButtonGroup
 							size="large"

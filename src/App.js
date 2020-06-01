@@ -14,7 +14,8 @@ import {
 import clsx from "clsx"
 
 //Material imports
-import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
+import theme from "./theme"
 import grey from '@material-ui/core/colors/grey';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
@@ -29,15 +30,6 @@ import Device from "./device"
 import PageList from "./pagelist"
 
 const title = "Zane Clark, Ketexon"
-
-const theme = createMuiTheme({
-	palette: {
-		type: "dark",
-	},
-	typography:{
-		fontSize:16
-	}
-});
 
 const useStyles = makeStyles((theme) => ({
 	
@@ -54,7 +46,7 @@ export default function App(props) {
 					<Route exact path="/" component={PageList.index.page}/>
 					{
 						PageList.pages.map((page,index)=>(
-							<Route path={page.href} component={page.page}/>
+							<Route key={index} path={page.href} component={page.page}/>
 						))
 					}
 					<Route component={PageList.errors[404].page}/>

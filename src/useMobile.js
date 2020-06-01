@@ -2,8 +2,8 @@ import {useState, useEffect} from "react";
 
 import useWindowDimensions from "./useWindowDimensions"
 
-const defaultBoundary = 0.75;
-// Default boundary between aspect ratio of mobile and desktop. Since the site breaks at 0.75, use that
+const defaultBoundary = 1;
+// Default boundary between aspect ratio of mobile and desktop. Using a default of 1 due to compatability
 // NOTE: Mobile is less than OR EQUAL TO the aspect ratio
 
 export default function useMobile(boundary){
