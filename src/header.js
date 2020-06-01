@@ -34,7 +34,6 @@ import ButtonGroup from '@material-ui/core/ButtonGroup';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import HomeIcon from '@material-ui/icons/Home';
-import InfoIcon from '@material-ui/icons/Info';
 
 // Custom components
 import Device from "./device";
@@ -77,11 +76,13 @@ const useStyles = makeStyles((theme) => ({
 	}
 }));
 
-/* Header URLs to be passed using props.pages in the format
- 		{
-			"title":"text",
-			"to":"url"
-		}
+/* Header URLs to be passed using props.pages in the Page format:
+	{
+		href: string - url of page
+		title: string - title of page
+		icon: component - Icon to render
+		page: component - Component of page
+	}
 */	
 
 function DrawerItem(props){
@@ -102,16 +103,6 @@ export default function Header(props){
 	const theme = useTheme();
 	const classes = useStyles(theme, mobile);
 	
-	if(!props.disableAutoIcons){ // auto generate icons based on names
-		for(let i in pages){
-			if(!("icon" in pages[i])){
-				if(["info","about"].includes(pages[i].title.toLowerCase())){
-					pages[i].icon = <InfoIcon fontSize="large"/>
-				}
-			}
-		}
-	}
-	
 	const [drawerOpen, setDrawerOpen] = useState(false);
 
 	const toggleDrawer = open=>event=>{
@@ -128,7 +119,7 @@ export default function Header(props){
 			<Divider/>
 			{
 				pages.map((page,index)=>(
-					<DrawerItem key={index} icon={page.icon || false} to={page.to} toggleDrawer={toggleDrawer} text={page.title.toUpperCase()}/>
+					<DrawerItem key={index} icon={page.icon || false} to={page.href} toggleDrawer={toggleDrawer} text={page.title.toUpperCase()}/>
 				))
 			}
 			</List>
@@ -182,7 +173,7 @@ export default function Header(props){
 								{
 									pages.map(
 										(page, index)=>(
-											<Button component={Link} key={index} to={location=>({...location, pathname:page.to})}>{page.title}</Button>
+											<Button component={Link} key={index} to={location=>({...location, pathname:page.href})}>{page.title}</Button>
 										)
 									)
 								}

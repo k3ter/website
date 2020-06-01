@@ -26,12 +26,7 @@ import Header from "./header"
 import Device from "./device"
 
 //Pages
-import Home from "./pages/home"
-import {E404} from "./pages/error"
-
-const headerPages = [
-	{title:"about", to:"/about"}
-]
+import PageList from "./pagelist"
 
 const title = "Zane Clark, Ketexon"
 
@@ -54,10 +49,15 @@ export default function App(props) {
 		<Router>
 			<ThemeProvider theme={theme}>
 				<CssBaseline />
-				<Header pages={headerPages} title={title}/>
+				<Header pages={PageList.pages} title={title}/>
 				<Switch>
-					<Route exact path="/" component={Home}/>
-					<Route component={E404}/>
+					<Route exact path="/" component={PageList.index.page}/>
+					{
+						PageList.pages.map((page,index)=>(
+							<Route path={page.href} component={page.page}/>
+						))
+					}
+					<Route component={PageList.errors[404].page}/>
 				</Switch>
 			</ThemeProvider>
 		</Router>
