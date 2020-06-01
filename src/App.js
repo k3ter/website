@@ -4,7 +4,7 @@ import React, {
 	useEffect
 } from 'react';
 import {
-  BrowserRouter as Router,
+  HashRouter as Router,
   Switch,
   Route,
   Link
@@ -38,6 +38,9 @@ const title = "Zane Clark, Ketexon"
 const theme = createMuiTheme({
 	palette: {
 		type: "dark",
+	},
+	typography:{
+		fontSize:16
 	}
 });
 
