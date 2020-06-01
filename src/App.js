@@ -26,8 +26,8 @@ import Header from "./header"
 import Device from "./device"
 
 //Pages
-import Home from "./home"
-import {E404} from "./error"
+import Home from "./pages/home"
+import {E404} from "./pages/error"
 
 const headerPages = [
 	{title:"about", to:"/about"}
@@ -49,12 +49,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function App(props) {
 	const getQuery = queryString.parse(window.location.search);
-	
-	useEffect(
-		()=>{
-			document.title = title;
-		}
-	)
 	
 	return (
 		<Router>
